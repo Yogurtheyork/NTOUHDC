@@ -1,32 +1,37 @@
-// rentSpaceAutomation.js
 const puppeteer = require('puppeteer');
-require('dotenv').config();
 
 async function rentSpaceAutomation(startDay, endDay) {
-    const browser = await puppeteer.launch({ 
-        headless: false, // Show browser for CAPTCHA input
-        defaultViewport: { width: 1366, height: 768 }
-    });
+    // Check if we're running locally or in Lambda
+    let options = {};
     
-    console.log(process.env.ACCOUNT);
+    options = {
+        headless: false,
+        defaultViewport: { width: 1366, height: 768 }
+    }
+
 
     try {
+        let browser = await puppeteer.launch(options);
+
         const page = await browser.newPage();
 
         // Navigate to NTOU club system login page
         console.log('Opening login page...');
         await page.goto('https://sclub.ntou.edu.tw/login.php', {
-            waitUntil: 'networkidle0'
+            waitUntil: 'networkidle0',
+            timeout: 30000
         });
 
         // Select student login
         console.log('Selecting student login...');
-        await page.waitForSelector('input[name="lc"][value="2"]');
+        await page.waitForSelector('input[name="lc"][value="2"]', { timeout: 30000 });
         await page.click('input[name="lc"][value="2"]');
 
+        // Login
         await page.type('input[name="account"]', process.env.ACCOUNT);
         await page.type('input[name="passwd"]', process.env.PASSWORD);
 
+        // Wait for navigation after login
         await Promise.all([
             page.waitForNavigation({ waitUntil: 'networkidle0' }),
             new Promise(resolve => {
@@ -49,40 +54,40 @@ async function rentSpaceAutomation(startDay, endDay) {
             
             // Navigate to space rental page
             await page.goto('https://sclub.ntou.edu.tw/?p=vb_ap&wk=add', {
-                waitUntil: 'networkidle0'
+                waitUntil: 'networkidle0',
+                timeout: 30000
             });
-
-            await page.select('select[name="place"]', '活動中心採光中庭-前段(含鏡子)')
 
             // Fill form
             const formattedDate = currentDate.toISOString().split('T')[0];
             
+            await page.select('select[name="place"]', '活動中心採光中庭-前段(含鏡子)');
             await page.type('input[name="aName"]', '熱舞社練習');
             await page.type('input[name="gPhone"]', process.env.PHONE);
             await page.type('input[name="gEmail"]', process.env.EMAIL);
 
-            // Set date
+            // Set dates
             await page.evaluate((date) => {
                 document.querySelector('input[name="sDay"]').value = date;
-            }, formattedDate);
-
-            await page.evaluate((date) => {
                 document.querySelector('input[name="eDay"]').value = date;
             }, formattedDate);
-
-
 
             // Select time slots (5PM-8PM)
             const timeSlots = ['timep5', 'timep6', 'timep7'];
             for (const slot of timeSlots) {
-                await page.waitForSelector(`#${slot}`);
-                const isChecked = await page.$eval(`#${slot}`, checkbox => checkbox.checked);
+                await page.waitForSelector(`#${slot}`, { timeout: 30000 });
+                await page.evaluate((slotId) => {
+                    document.getElementById(slotId).checked = true;
+                }, slot);
             }
 
-            // Submit form
+            // Submit form and wait for navigation
             await Promise.all([
-                page.click('input[type="submit"]'),
-                page.waitForNavigation({ waitUntil: 'networkidle0' })
+                page.waitForNavigation({ 
+                    waitUntil: 'networkidle0',
+                    timeout: 30000 
+                }),
+                page.click('input[type="submit"]')
             ]);
 
             // Move to next day
@@ -94,8 +99,12 @@ async function rentSpaceAutomation(startDay, endDay) {
     } catch (error) {
         console.error('Automation error:', error);
         throw error;
+    } finally {
+        // Close browser
+        if (browser) {
+            await browser.close();
+        }
     }
-    // Don't close the browser - let user see the final page
 }
 
 module.exports = rentSpaceAutomation;

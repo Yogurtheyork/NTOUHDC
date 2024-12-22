@@ -1,19 +1,19 @@
 // server.js
 require('dotenv').config();
 const express = require('express');
-const app = express();
-const cors = require('cors');
-const rentSpaceAutomation = require('../routes/rentSpaceAutomation');
 const path = require('path');
+const rentSpaceAutomation = require('../routes/rentSpaceAutomation');
 
+const app = express();
 
 app.use(express.json());
 app.use(express.static('public'));
 
-
 app.get('/', (req, res) => {
-    res.sendFile('public/HomePage.html', { root: path.join(__dirname, '..') });
-  });
+    const filePath = path.join(__dirname, '..', 'public', 'HomePage.html');
+    res.sendFile(filePath);
+});
+
 
 // Rent space endpoint
 app.post('/rent-space', async (req, res) => {
