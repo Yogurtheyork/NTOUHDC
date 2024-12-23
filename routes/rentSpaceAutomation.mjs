@@ -1,12 +1,18 @@
 import 'dotenv/config';
 import puppeteer from 'puppeteer-core/lib/esm/puppeteer/puppeteer-core-browser.js';
 
+const chromePath = process.env.CHROME_PATH || '/opt/render/.cache/puppeteer/chrome/linux-1095492/chrome-linux/chrome';
+
 async function rentSpaceAutomation(startDay, endDay) {
-    
+    let options = {
+        headless: true,
+        defaultViewport: { width: 1366, height: 768 },
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        executablePath: chromePath
+    };
+
     try {
-        const browser = await puppeteer.connect({
-            browserWSEndpoint: wsUrl,
-          });
+        const browser = await puppeteer.launch(options);
         const page = await browser.newPage();
 
         // Navigate to NTOU club system login page
