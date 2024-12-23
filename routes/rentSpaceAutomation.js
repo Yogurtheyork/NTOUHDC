@@ -5,6 +5,10 @@ async function rentSpaceAutomation(startDay, endDay) {
     const option={
         headless: false,
         defaultViewport: { width: 1366, height: 768 },
+        puppeteer.executablePath:
+            process.env.NODE_ENV === 'production'
+            ? process.env.PUPPETEER_EXECUTABLE_PATH
+            : puppeteer.executablePath(),
     }
 
     try {
