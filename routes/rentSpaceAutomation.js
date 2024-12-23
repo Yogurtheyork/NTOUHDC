@@ -8,11 +8,6 @@ async function rentSpaceAutomation(startDay, endDay) {
         args: ['--no-sandbox', '--disable-setuid-sandbox']
     };
 
-    // 確定 Puppeteer 的 Chrome 路徑
-    const browserFetcher = puppeteer.createBrowserFetcher();
-    const revisionInfo = await browserFetcher.download('1095492'); // 使用 Puppeteer 的特定版本
-    options.executablePath = revisionInfo.executablePath;
-
     try {
         const browser = await puppeteer.launch(options);
         const page = await browser.newPage();
