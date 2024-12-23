@@ -49,4 +49,4 @@ async function rentSpaceAutomation(startDay, endDay) {
     }
 }
 
-module.exports = { rentSpaceAutomation };
+module.exports = rentSpaceAutomation;
