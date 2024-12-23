@@ -1,15 +1,12 @@
-require('dotenv').config();
-const puppeteer = require('puppeteer');
+import 'dotenv/config';
+import puppeteer from 'puppeteer-core/lib/esm/puppeteer/puppeteer-core-browser.js';
 
 async function rentSpaceAutomation(startDay, endDay) {
-    let options = {
-        headless: true,
-        defaultViewport: { width: 1366, height: 768 },
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
-    };
-
+    
     try {
-        const browser = await puppeteer.launch(options);
+        const browser = await puppeteer.connect({
+            browserWSEndpoint: wsUrl,
+          });
         const page = await browser.newPage();
 
         // Navigate to NTOU club system login page
@@ -50,4 +47,4 @@ async function rentSpaceAutomation(startDay, endDay) {
     }
 }
 
-module.exports = rentSpaceAutomation;
+export default rentSpaceAutomation;
