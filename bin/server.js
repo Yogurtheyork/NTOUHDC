@@ -1,9 +1,9 @@
-import cors from 'cors';
-import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import rentSpaceAutomation from '../routes/rentSpaceAutomation.mjs';
-import 'dotenv/config';
+const cors = require('cors');
+const express = require('express');
+const path = require('path');
+const { fileURLToPath } = require('url');
+const { rentSpaceAutomation } = require('./routes/rentSpaceAutomation.js');
+require('dotenv').config();
 
 const app = express();
 app.use(cors());
@@ -41,4 +41,4 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
-export default app;
+module.exports = app;

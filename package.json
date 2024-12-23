@@ -1,9 +1,6 @@
 {
-  "type": "module",
   "scripts": {
-    "start": "node bin/server.mjs",
-    "postinstall": "npx puppeteer install",
-    "build": "rollup -c"
+    "start": "node bin/server.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -13,8 +10,7 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
-    "puppeteer-core": "^23.11.1",
-    "dotenv": "^16.4.7",
-    "@rollup/plugin-node-resolve": "^13.3.0"
+    "puppeteer": "^23.11.1",
+    "dotenv": "^16.4.7"
   }
 }
