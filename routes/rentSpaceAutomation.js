@@ -2,6 +2,7 @@ require('dotenv').config();
 const puppeteer = require('puppeteer');
 
 async function rentSpaceAutomation(startDay, endDay) {
+    let browser ;
     const option={
         headless: false,
         defaultViewport: { width: 1366, height: 768 },
@@ -12,7 +13,7 @@ async function rentSpaceAutomation(startDay, endDay) {
     }
 
     try {
-        const browser = await puppeteer.launch(option);
+        browser = await puppeteer.launch(option);
         const page = await browser.newPage();
 
         // Navigate to NTOU club system login page
