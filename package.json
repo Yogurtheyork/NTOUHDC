@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "node bin/server.js",
-    "postinstall": "npx puppeteer install"
+    "postinstall": "npx puppeteer install chrome"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
