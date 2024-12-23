@@ -14,10 +14,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
     "puppeteer-core": "^23.11.1",
-    "dotenv": "^16.4.7"
-  },
-  "devDependencies": {
-    "rollup": "^3.0.0",
+    "dotenv": "^16.4.7",
     "@rollup/plugin-node-resolve": "^13.3.0"
   }
 }
