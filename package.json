@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node ./bin/server.js"
+    "start": "node bin/server.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
