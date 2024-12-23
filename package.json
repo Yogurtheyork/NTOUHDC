@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "node bin/server.js"
+    "start": "node bin/server.js",
+    "postinstall": "npx puppeteer install"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
