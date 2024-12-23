@@ -1,9 +1,12 @@
 // server.js
+const cors = require('cors');
 const express = require('express');
 const path = require('path');
 const rentSpaceAutomation = require('../routes/rentSpaceAutomation');
+require('dotenv').config();
 
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 app.use(express.static('public'));
@@ -30,6 +33,11 @@ app.post('/rent-space', async (req, res) => {
         console.error("Automation task failed:", error);
         res.status(500).send('Automation task failed. Please check logs for details.');
     }
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
 
 module.exports = app;

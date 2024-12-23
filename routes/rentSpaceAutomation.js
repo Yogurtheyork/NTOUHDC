@@ -1,9 +1,11 @@
+require('dotenv').config();
 const puppeteer = require('puppeteer');
+
 
 async function rentSpaceAutomation(startDay, endDay) {
     // Check if we're running locally or in Lambda
     let options = {};
-    
+    let browser ;
     options = {
         headless: false,
         defaultViewport: { width: 1366, height: 768 }
@@ -11,7 +13,7 @@ async function rentSpaceAutomation(startDay, endDay) {
 
 
     try {
-        let browser = await puppeteer.launch(options);
+        browser = await puppeteer.launch(options);
 
         const page = await browser.newPage();
 
