@@ -5,10 +5,10 @@ async function rentSpaceAutomation(startDay, endDay) {
     const option={
         headless: false,
         defaultViewport: { width: 1366, height: 768 },
-        puppeteer.executablePath:
+        executablePath:
             process.env.NODE_ENV === 'production'
             ? process.env.PUPPETEER_EXECUTABLE_PATH
-            : puppeteer.executablePath(),
+            : puppeteer.executablePath()
     }
 
     try {
@@ -41,16 +41,69 @@ async function rentSpaceAutomation(startDay, endDay) {
                         clearInterval(checkLoginButton);
                         resolve();
                     }
-                }, 100);
+                }, 1000);
             })
         ]);
 
-        // ...existing code...
+        // Process each day in the date range
+        const currentDate = new Date(startDay);
+        const endDate = new Date(endDay);
+        
+        while (currentDate <= endDate) {
+            console.log(`Processing date: ${currentDate.toISOString().split('T')[0]}`);
+            
+            // Navigate to space rental page
+            await page.goto('https://sclub.ntou.edu.tw/?p=vb_ap&wk=add', {
+                waitUntil: 'networkidle0',
+                timeout: 30000
+            });
 
-        await browser.close();
+            // Fill form
+            const formattedDate = currentDate.toISOString().split('T')[0];
+            
+            await page.select('select[name="place"]', '活動中心採光中庭-前段(含鏡子)');
+            await page.type('input[name="aName"]', '熱舞社練習');
+            await page.type('input[name="gPhone"]', process.env.PHONE);
+            await page.type('input[name="gEmail"]', process.env.EMAIL);
+
+            // Set dates
+            await page.evaluate((date) => {
+                document.querySelector('input[name="sDay"]').value = date;
+                document.querySelector('input[name="eDay"]').value = date;
+            }, formattedDate);
+
+            // Select time slots (5PM-8PM)
+            const timeSlots = ['timep5', 'timep6', 'timep7'];
+            for (const slot of timeSlots) {
+                await page.waitForSelector(`#${slot}`, { timeout: 30000 });
+                await page.evaluate((slotId) => {
+                    document.getElementById(slotId).checked = true;
+                }, slot);
+            }
+
+            // Submit form and wait for navigation
+            await Promise.all([
+                page.waitForNavigation({ 
+                    waitUntil: 'networkidle0',
+                    timeout: 30000 
+                }),
+                page.click('input[type="submit"]')
+            ]);
+
+            // Move to next day
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        console.log('All bookings completed successfully');
+        
     } catch (error) {
-        console.error("Automation task failed:", error);
+        console.error('Automation error:', error);
+        throw error;
+    } finally {
+        // Close browser
+        if (browser) {
+            await browser.close();
+        }
     }
 }
-
 module.exports = rentSpaceAutomation;
