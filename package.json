@@ -10,7 +10,7 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
-    "puppeteer": "19.7.2",
+    "puppeteer": "^19.7.2",
     "dotenv": "^16.4.7"
   }
 }

@@ -2,18 +2,13 @@ require('dotenv').config();
 const puppeteer = require('puppeteer');
 
 async function rentSpaceAutomation(startDay, endDay) {
-    let browser ;
-    const option={
+    const browser = await puppeteer.launch({
         headless: false,
         defaultViewport: { width: 1366, height: 768 },
-        executablePath:
-            process.env.NODE_ENV === 'production'
-            ? process.env.PUPPETEER_EXECUTABLE_PATH
-            : puppeteer.executablePath()
-    }
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
+    });
 
     try {
-        browser = await puppeteer.launch(option);
         const page = await browser.newPage();
 
         // Navigate to NTOU club system login page
@@ -26,7 +21,7 @@ async function rentSpaceAutomation(startDay, endDay) {
         // Select student login
         console.log('Selecting student login...');
         await page.waitForSelector('input[name="lc"][value="2"]', { timeout: 30000 });
-        await page.click('input[name="lc"][value="2"]'); 
+        await page.click('input[name="lc"][value="2"]');
 
         // Login
         await page.type('input[name="account"]', process.env.ACCOUNT);
@@ -42,7 +37,7 @@ async function rentSpaceAutomation(startDay, endDay) {
                         clearInterval(checkLoginButton);
                         resolve();
                     }
-                }, 1000);
+                }, 100);
             })
         ]);
 
