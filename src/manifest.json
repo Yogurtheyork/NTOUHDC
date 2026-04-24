@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "NTOU 場地借用小幫手",
+  "version": "1.0.1",
+  "description": "快速填寫海洋大學社團場地借用表單，自動化處理多日期借用申請",
+  "author": "York",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://sclub.ntou.edu.tw/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://sclub.ntou.edu.tw/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

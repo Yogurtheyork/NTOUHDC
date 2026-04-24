@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NTOU 場地借用小幫手</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <h1>場地借用小幫手</h1>
+        
+        <div class="section">
+            <h2>借用設定</h2>
+            
+            <div class="form-group">
+                <label for="startDate">開始日期：</label>
+                <input type="date" id="startDate" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="endDate">結束日期：</label>
+                <input type="date" id="endDate" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="clubName">社團名稱：</label>
+                <input type="text" id="clubName" maxlength="20" placeholder="例如：熱舞社" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="responsiblePerson">活動負責人：</label>
+                <input type="text" id="responsiblePerson" maxlength="5" placeholder="請輸入姓名" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="venue">場地：</label>
+                <select id="venue" required>
+                    <option value="">請選擇場地</option>
+                    <option value="海洋廳">海洋廳</option>
+                    <option value="展示廳">展示廳</option>
+                    <option value="學生活動中心-展演廳">學生活動中心-展演廳</option>
+                    <option value="學生活動中心-B01教室(原民廳)">學生活動中心-B01教室(原民廳)</option>
+                    <option value="學生活動中心-B02教室">學生活動中心-B02教室</option>
+                    <option value="學生活動中心-B05教室">學生活動中心-B05教室</option>
+                    <option value="學生活動中心-B06教室">學生活動中心-B06教室</option>
+                    <option value="學生活動中心-B11教室">學生活動中心-B11教室</option>
+                    <option value="學生活動中心-B12教室">學生活動中心-B12教室</option>
+                    <option value="學生活動中心-B13教室">學生活動中心-B13教室</option>
+                    <option value="學生活動中心-B14教室">學生活動中心-B14教室</option>
+                    <option value="活動中心採光中庭-前段(含鏡子)">活動中心採光中庭-前段(含鏡子)</option>
+                    <option value="活動中心採光中庭-後段(攀岩區)">活動中心採光中庭-後段(攀岩區)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="activityName">活動名稱：</label>
+                <input type="text" id="activityName" maxlength="30" placeholder="請輸入活動名稱" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">聯絡電話：</label>
+                <input type="tel" id="phone" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email：</label>
+                <input type="email" id="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label>時段（預設 5PM-8PM）：</label>
+                <div class="time-slots">
+                    <label><input type="checkbox" class="time-slot" value="timep5" checked> 5PM-6PM</label>
+                    <label><input type="checkbox" class="time-slot" value="timep6" checked> 6PM-7PM</label>
+                    <label><input type="checkbox" class="time-slot" value="timep7" checked> 7PM-8PM</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section instructions">
+            <h3>使用說明：</h3>
+            <ol>
+                <li>請先手動登入 <a href="https://sclub.ntou.edu.tw/login.php" target="_blank">社團系統</a></li>
+                <li>輸入驗證碼完成登入</li>
+                <li>填寫上方表單資訊</li>
+                <li>點擊「開始自動借用」按鈕</li>
+            </ol>
+        </div>
+        
+        <button id="startBtn" class="btn-primary">開始自動借用</button>
+        
+        <div id="status" class="status"></div>
+        
+        <div id="progress" class="progress-container" style="display: none;">
+            <div class="progress-bar">
+                <div id="progressBar" class="progress-fill"></div>
+            </div>
+            <div id="progressText" class="progress-text"></div>
+        </div>
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>
