@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NTOU 場地借用小幫手 安裝說明</title>
+<style>
+  :root { color-scheme: light; }
+  body { margin: 0; background: #f4f7fb; color: #1f2933; font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", system-ui, sans-serif; line-height: 1.7; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 32px 20px 64px; }
+  header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+  header img { width: 48px; height: 48px; border-radius: 10px; }
+  h1 { font-size: 26px; margin: 0; }
+  .lead { color: #52606d; margin: 0 0 28px; }
+  section { background: #fff; border: 1px solid #e1e7ef; border-radius: 12px; padding: 20px 24px; margin-bottom: 18px; }
+  h2 { font-size: 18px; margin: 0 0 12px; color: #0b5394; }
+  ol { padding-left: 22px; margin: 0; }
+  li { margin: 6px 0; }
+  code { background: #eef3f9; border: 1px solid #d5dfeb; border-radius: 5px; padding: 1px 7px; font-size: 15px; font-family: Consolas, Menlo, monospace; }
+  .note { background: #fff8e1; border-left: 4px solid #f3b83c; padding: 8px 14px; border-radius: 6px; margin-top: 12px; font-size: 15px; }
+  .qa dt { font-weight: 700; margin-top: 12px; }
+  .qa dd { margin: 2px 0 0 0; color: #3e4c59; }
+  footer { color: #7b8794; font-size: 13px; text-align: center; margin-top: 24px; }
+  a { color: #0b5394; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="icons/icon48.png" alt="">
+    <h1>NTOU 場地借用小幫手　安裝說明</h1>
+  </header>
+  <p class="lead">這個資料夾就是擴充功能本體，不用安裝其他軟體。照下面步驟做一次，之後打開瀏覽器就能直接用。</p>
+
+  <section>
+    <h2>一、解壓縮</h2>
+    <ol>
+      <li>在 <code>NTOU-Helper-Local.zip</code> 上按右鍵 →「全部解壓縮」（Mac 直接點兩下）。</li>
+      <li>把解壓出來的資料夾放在「不會被刪掉」的地方，例如「文件」或「桌面」。</li>
+    </ol>
+    <div class="note">之後請不要移動或刪除這個資料夾，否則擴充功能會失效。</div>
+  </section>
+
+  <section>
+    <h2>二、在 Chrome 安裝</h2>
+    <ol>
+      <li>打開 Chrome，在網址列輸入 <code>chrome://extensions</code> 後按 Enter。</li>
+      <li>把右上角的「<b>開發人員模式</b>」開關打開。</li>
+      <li>點左上角出現的「<b>載入未封裝項目</b>」按鈕。</li>
+      <li>選擇剛剛解壓縮出來的資料夾（裡面要看得到 <code>manifest.json</code>），按「選擇資料夾」。</li>
+      <li>完成！清單裡會出現「NTOU 場地借用小幫手」。</li>
+    </ol>
+    <div class="note">用 <b>Microsoft Edge</b> 的話步驟相同，網址改成 <code>edge://extensions</code>，按鈕名稱是「載入解壓縮」。</div>
+  </section>
+
+  <section>
+    <h2>三、把圖示釘在工具列（建議）</h2>
+    <p style="margin:0">點瀏覽器右上角的「拼圖」🧩 圖示，找到「NTOU 場地借用小幫手」，按旁邊的「圖釘」，圖示就會固定在工具列上。</p>
+  </section>
+
+  <section>
+    <h2>四、開始使用</h2>
+    <ol>
+      <li>先到 <a href="https://sclub.ntou.edu.tw/" target="_blank">海大社團系統</a> 登入。</li>
+      <li>登入後，點工具列上的「NTOU 場地借用小幫手」圖示。</li>
+      <li>填寫開始／結束日期、場地、社團名稱、負責人、電話、信箱，並勾選要借用的時段。</li>
+      <li>按「<b>開始自動借用</b>」。</li>
+      <li>擴充功能會自動一天一天填表、送出。請耐心等進度條跑完，過程中不要關閉或切換那個分頁。</li>
+    </ol>
+    <div class="note">聯絡資料會自動記住，下次打開就不用再填。</div>
+  </section>
+
+  <section>
+    <h2>五、常見問題</h2>
+    <dl class="qa">
+      <dt>載入時出現「manifest file is missing or unreadable」</dt>
+      <dd>選錯資料夾了。請確認你選的資料夾裡面直接就有 <code>manifest.json</code>，不是它的上一層或下一層。</dd>
+      <dt>按「開始自動借用」沒反應</dt>
+      <dd>請先確認已經登入社團系統，而且目前分頁是 sclub.ntou.edu.tw。</dd>
+      <dt>Chrome 跳出「停用開發人員模式的擴充功能？」</dt>
+      <dd>按「取消」或「保留」即可，這是本機安裝擴充功能的正常提示。</dd>
+      <dt>擴充功能不見了</dt>
+      <dd>通常是解壓縮的資料夾被移動或刪除。請重新解壓縮，再做一次「二」的步驟。</dd>
+      <dt>自動化跑到一半停了</dt>
+      <dd>可能是社團系統網頁改版，請到 <a href="https://github.com/Yogurtheyork/NTOUHDC/issues" target="_blank">GitHub 回報</a>。</dd>
+    </dl>
+  </section>
+
+  <footer>原始碼與最新版本：<a href="https://github.com/Yogurtheyork/NTOUHDC" target="_blank">github.com/Yogurtheyork/NTOUHDC</a>　·　MIT License</footer>
+</div>
+</body>
+</html>

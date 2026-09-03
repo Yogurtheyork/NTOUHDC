@@ -10,14 +10,21 @@
 
 ## 安裝方式
 
+### 一般使用者（不需要寫程式）
+1. 到 [Releases 頁面](https://github.com/Yogurtheyork/NTOUHDC/releases/latest) 下載 `NTOU-Helper-Local.zip`。
+2. 解壓縮，把資料夾放在不會被刪掉的地方（例如「文件」）。
+3. 打開 Chrome，前往 `chrome://extensions/`，開啟右上角的**開發人員模式**。
+4. 點擊**載入未封裝項目**，選擇剛剛解壓縮出來的資料夾（裡面直接有 `manifest.json`）。
+5. 完成！詳細圖文步驟與常見問題請看 zip 裡的 `安裝說明.html`。
 
+Microsoft Edge 使用者：網址改成 `edge://extensions/`，按鈕名稱是「載入解壓縮」。
 
-### 本地端安裝（開發者模式）
-1. 下載或 Clone 此專案到您的電腦。
-2. 打開 Google Chrome 瀏覽器，並前往 `chrome://extensions/`。
-3. 開啟右上角的**開發者模式**。
-4. 點擊左上角的**載入未封裝項目**，然後選擇本專案底下的 `dist` 資料夾（或是您解壓縮 `NTOU-Helper-Local.zip` 後的資料夾）。
-5. 安裝完成後，擴充功能圖示將出現在您的瀏覽器工具列中。
+### 開發者：從原始碼建置
+```bash
+npm install
+npm run build   # 編譯 TypeScript、複製靜態檔、產生圖示，並輸出 NTOU-Helper-Local.zip
+```
+建置完成後，`dist/` 就是可直接載入的擴充功能資料夾，`NTOU-Helper-Local.zip` 則是可以直接發給別人的壓縮檔。
 
 ## 使用說明
 1. 先登入 [海洋大學社團系統](https://sclub.ntou.edu.tw/)。

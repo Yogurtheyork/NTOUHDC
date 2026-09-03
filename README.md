@@ -10,14 +10,21 @@ A Chrome browser extension designed to automate the process of booking club venu
 
 ## Installation
 
+### For end users (no coding required)
+1. Download `NTOU-Helper-Local.zip` from the [latest release](https://github.com/Yogurtheyork/NTOUHDC/releases/latest).
+2. Extract it and keep the folder somewhere permanent (e.g. Documents).
+3. Open Chrome, go to `chrome://extensions/`, and enable **Developer mode** (top right).
+4. Click **Load unpacked** and select the extracted folder (the one that directly contains `manifest.json`).
+5. Done. A step-by-step guide with FAQ is included in the zip as `安裝說明.html`.
 
+Microsoft Edge: use `edge://extensions/` instead; the button is labelled **Load unpacked**.
 
-### Local Installation (Developer Mode)
-1. Download or clone this repository.
-2. Open Google Chrome and navigate to `chrome://extensions/`.
-3. Enable **Developer mode** in the top right corner.
-4. Click **Load unpacked** and select the `dist` directory inside this project (or the folder where you extracted `NTOU-Helper-Local.zip`).
-5. The extension will now appear in your browser.
+### For developers: build from source
+```bash
+npm install
+npm run build   # compiles TypeScript, copies static files, generates icons, and writes NTOU-Helper-Local.zip
+```
+After building, `dist/` is a loadable extension folder and `NTOU-Helper-Local.zip` is ready to distribute.
 
 ## Usage
 1. Log in to the [NTOU Club Venue Booking System](https://sclub.ntou.edu.tw/).
